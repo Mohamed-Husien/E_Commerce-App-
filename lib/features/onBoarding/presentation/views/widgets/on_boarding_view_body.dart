@@ -5,8 +5,26 @@ import 'package:e_commerce_app/core/widgets/custom_button.dart';
 import 'package:e_commerce_app/features/onBoarding/presentation/views/widgets/on_boarding_page_view.dart';
 import 'package:flutter/material.dart';
 
-class OnBoardingViewBody extends StatelessWidget {
+class OnBoardingViewBody extends StatefulWidget {
   const OnBoardingViewBody({super.key});
+
+  @override
+  State<OnBoardingViewBody> createState() => _OnBoardingViewBodyState();
+}
+
+class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
+  late PageController pageController;
+  var currentPageIndex = 0;
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController();
+    pageController.addListener(() {
+      setState(() {
+        currentPageIndex = pageController.page!.round();
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
