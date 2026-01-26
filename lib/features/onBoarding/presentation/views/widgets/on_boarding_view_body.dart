@@ -22,6 +22,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
     pageController.addListener(() {
       setState(() {
         currentPageIndex = pageController.page!.round();
+        setState(() {});
       });
     });
   }
@@ -30,24 +31,34 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Expanded(
-          child: OnBoardingPageView(),
+        Expanded(
+          child: OnBoardingPageView(
+            pageController: pageController,
+          ),
         ),
         DotsIndicator(
           dotsCount: 2,
           decorator: DotsDecorator(
             activeColor: AppColors.primaryColor,
-            color: AppColors.primaryColor.withOpacity(0.50),
+            color: currentPageIndex == 1
+                ? AppColors.primaryColor
+                : AppColors.primaryColor.withOpacity(0.50),
           ),
         ),
         const SizedBox(
           height: 29,
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
-          child: CustomButton(
-            onPressed: () {},
-            text: 'ابدأ الان',
+        Visibility(
+          maintainAnimation: true,
+          maintainSize: true,
+          maintainState: true,
+          visible: currentPageIndex == 1 ? true : false,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
+            child: CustomButton(
+              onPressed: () {},
+              text: 'ابدأ الان',
+            ),
           ),
         ),
         const SizedBox(
