@@ -30,10 +30,12 @@ class OnBoardingPageView extends StatelessWidget {
               "ابحث وتسوق",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Color(0xff0C0D0D),
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                  height: 0),
+                color: Color(0xff0C0D0D),
+                fontSize: 24,
+                fontFamily: 'Cairo',
+                fontWeight: FontWeight.w700,
+                height: 0,
+              ),
             ),
             subTitle:
                 "نقدم لك أفضل الفواكه المختارة بعناية. اطلع على التفاصيل والصور والتقييمات لتتأكد من اختيار الفاكهة المثالية"),
