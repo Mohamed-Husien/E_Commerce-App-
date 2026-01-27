@@ -1,4 +1,6 @@
+import 'package:e_commerce_app/core/utils/app_colors.dart';
 import 'package:e_commerce_app/core/utils/app_images.dart';
+import 'package:e_commerce_app/core/utils/app_text_styles.dart';
 import 'package:e_commerce_app/features/onBoarding/presentation/views/widgets/page_view_item.dart';
 import 'package:flutter/material.dart';
 
@@ -16,12 +18,21 @@ class OnBoardingPageView extends StatelessWidget {
                   0,
           image: Assets.imagesPageViewItem1Image,
           backgroundImage: Assets.imagesPageViewItem1BackgroundImage,
-          title: const Row(
+          title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("مرحبًا بك في "),
-              Text("HUB"),
-              Text("Fruit"),
+              const Text(
+                "مرحبًا بك في ",
+                style: TextStyles.bold23,
+              ),
+              Text("HUB",
+                  style: TextStyles.bold23.copyWith(
+                    color: AppColors.secondaryColor,
+                  )),
+              Text("Fruit",
+                  style: TextStyles.bold23.copyWith(
+                    color: AppColors.primaryColor,
+                  )),
             ],
           ),
           subTitle:
