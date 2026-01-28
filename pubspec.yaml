@@ -35,6 +35,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl_utils: null
+  shared_preferences:
   svg_flutter: ^0.0.1
 
 dev_dependencies:
@@ -79,7 +80,6 @@ flutter:
           weight: 600
         - asset: assets/fonts/Cairo-Bold.ttf
           weight: 700
-  #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
 flutter_launcher_icons:
