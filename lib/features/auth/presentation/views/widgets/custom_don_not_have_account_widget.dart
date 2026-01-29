@@ -1,5 +1,7 @@
 import 'package:e_commerce_app/core/utils/app_colors.dart';
 import 'package:e_commerce_app/core/utils/app_text_styles.dart';
+import 'package:e_commerce_app/features/auth/presentation/views/sign_up_view.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class DonNotHaveAccount extends StatelessWidget {
@@ -17,11 +19,14 @@ class DonNotHaveAccount extends StatelessWidget {
         ),
         children: [
           TextSpan(
-            text: "قم بإنشاء حساب",
-            style: TextStyles.semiBold16.copyWith(
-              color: AppColors.darkPrimaryColor,
-            ),
-          ),
+              text: "قم بإنشاء حساب",
+              style: TextStyles.semiBold16.copyWith(
+                color: AppColors.darkPrimaryColor,
+              ),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  Navigator.pushNamed(context, SignUpView.routeName);
+                }),
         ],
       ),
     );
