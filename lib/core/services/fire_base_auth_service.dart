@@ -17,31 +17,31 @@ class FireBaseAuthService {
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'weak-password':
-          throw CustomException('Password is too weak.');
+          throw CustomException('كلمة المرور ضعيفة جداً.');
 
         case 'email-already-in-use':
-          throw CustomException('Email is already in use.');
+          throw CustomException('البريد الإلكتروني مستخدم بالفعل.');
 
         case 'invalid-email':
-          throw CustomException('Invalid email address.');
+          throw CustomException(' البريد الإلكتروني غير صالح.');
 
         case 'operation-not-allowed':
-          throw CustomException('Email/password sign-in is not enabled.');
+          throw CustomException(' عملية غير مسموح بها.');
 
         case 'network-request-failed':
-          throw CustomException('No internet connection.');
+          throw CustomException(' لا يوجد اتصال بالإنترنت.');
 
         case 'too-many-requests':
-          throw CustomException('Too many attempts. Try again later.');
+          throw CustomException('عدد كبير من المحاولات. حاول مرة أخرى لاحقاً.');
 
         case 'internal-error':
-          throw CustomException('Server error occurred. Please try again.');
+          throw CustomException('حدث خطأ داخلي. حاول مرة أخرى.');
 
         default:
-          throw CustomException('Unexpected error occurred.');
+          throw CustomException('حدث خطأ غير متوقع.');
       }
     } catch (_) {
-      throw CustomException('Unexpected error occurred.');
+      throw CustomException('حدث خطأ غير متوقع.');
     }
   }
 }

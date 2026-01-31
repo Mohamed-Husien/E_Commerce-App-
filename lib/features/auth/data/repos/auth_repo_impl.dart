@@ -23,7 +23,7 @@ class AuthRepoImpl implements AuthRepo {
       );
     } catch (e) {
       return left(
-        ServerFailure('Unexpected error occurred.'),
+        ServerFailure('حدث خطأ غير متوقع'),
       );
     }
   }
