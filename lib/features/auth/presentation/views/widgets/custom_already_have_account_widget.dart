@@ -22,7 +22,10 @@ class AlreadyHaveAccount extends StatelessWidget {
             style: TextStyles.semiBold16.copyWith(
               color: AppColors.darkPrimaryColor,
             ),
-            recognizer: TapGestureRecognizer()..onTap = () {},
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                Navigator.pop(context);
+              },
           ),
         ],
       ),
