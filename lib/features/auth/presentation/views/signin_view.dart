@@ -1,5 +1,4 @@
-import 'package:e_commerce_app/core/widgets/custom_app_bar.dart';
-import 'package:e_commerce_app/features/auth/presentation/views/widgets/signin_view_body.dart';
+import 'package:e_commerce_app/features/auth/presentation/views/widgets/sign_in_view_body_bloc_consumer.dart';
 import 'package:flutter/material.dart';
 
 class SignInView extends StatelessWidget {
@@ -7,9 +6,6 @@ class SignInView extends StatelessWidget {
   static const String routeName = 'login';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: buildAppBar(context, title: "تسجيل دخول"),
-      body: const SignInViewBody(),
-    );
+    return const SignInViewBodyBlocConsumer();
   }
 }
