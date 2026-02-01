@@ -1,10 +1,10 @@
 import 'package:e_commerce_app/core/helper_functions/build_error_bar.dart';
 import 'package:e_commerce_app/core/widgets/custom_app_bar.dart';
+import 'package:e_commerce_app/core/widgets/custom_progress_hud.dart';
 import 'package:e_commerce_app/features/auth/presentation/manager/cubits/sign_up_cubit/sign_up_cubit.dart';
 import 'package:e_commerce_app/features/auth/presentation/views/widgets/sign_up_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class SignUpViewBodyBlocConsumer extends StatelessWidget {
   const SignUpViewBodyBlocConsumer({
@@ -23,8 +23,8 @@ class SignUpViewBodyBlocConsumer extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: buildAppBar(context, title: "حساب جديد"),
-          body: ModalProgressHUD(
-              inAsyncCall: state is SignUpLoading ? true : false,
+          body: CustomProgressHud(
+              isLoading: state is SignUpLoading ? true : false,
               child: const SignUpViewBody()),
         );
       },
