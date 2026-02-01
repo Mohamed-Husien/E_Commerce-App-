@@ -14,8 +14,8 @@ class AuthRepoImpl implements AuthRepo {
   Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword(
       String email, String password, String name) async {
     try {
-      var user =
-          fireBaseAuthService.createUserWithEmailAndPassword(email, password);
+      var user = await fireBaseAuthService.createUserWithEmailAndPassword(
+          email, password);
       return right(UserModel.fromUserModel(user));
     } on CustomException catch (e) {
       return left(

@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/core/helper_functions/build_error_bar.dart';
 import 'package:e_commerce_app/core/widgets/custom_app_bar.dart';
 import 'package:e_commerce_app/features/auth/presentation/manager/cubits/sign_up_cubit/sign_up_cubit.dart';
 import 'package:e_commerce_app/features/auth/presentation/views/widgets/sign_up_view_body.dart';
@@ -16,11 +17,7 @@ class SignUpViewBodyBlocConsumer extends StatelessWidget {
       listener: (context, state) {
         if (state is SignUpSuccess) {}
         if (state is SignUpFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.errorMessage),
-            ),
-          );
+          buildErrorBar(context, state.errorMessage);
         }
       },
       builder: (context, state) {

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:e_commerce_app/core/errors/exceptions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -15,6 +17,8 @@ class FireBaseAuthService {
 
       return credential.user!;
     } on FirebaseAuthException catch (e) {
+      log("Exception in FirebaseAuthService.createUserWithEmailAndPassword: ${e.toString()} and code is ${e.code}");
+
       switch (e.code) {
         case 'weak-password':
           throw CustomException('كلمة المرور ضعيفة جداً.');
@@ -40,7 +44,9 @@ class FireBaseAuthService {
         default:
           throw CustomException('حدث خطأ غير متوقع.');
       }
-    } catch (_) {
+    } catch (e) {
+      log("Exception in FirebaseAuthService.createUserWithEmailAndPassword: ${e.toString()}");
+
       throw CustomException('حدث خطأ غير متوقع.');
     }
   }
