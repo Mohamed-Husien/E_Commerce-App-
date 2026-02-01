@@ -30,4 +30,23 @@ class AuthRepoImpl implements AuthRepo {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, UserEntity>> signInWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      var user =
+          await fireBaseAuthService.signInWithEmailAndPassword(email, password);
+      return right(UserModel.fromUserModel(user));
+    } on CustomException catch (e) {
+      return left(
+        ServerFailure(e.message),
+      );
+    } catch (e) {
+      log("Exception in signInWithEmailAndPassword AuthRepoImpl: $e");
+      return left(
+        ServerFailure('حدث خطأ غير متوقع'),
+      );
+    }
+  }
 }
