@@ -1,5 +1,5 @@
 import 'package:e_commerce_app/core/helper_functions/on_generate_route.dart';
-import 'package:e_commerce_app/core/services/custom_bloc_observer,dart';
+import 'package:e_commerce_app/core/services/custom_bloc_observer.dart';
 import 'package:e_commerce_app/core/services/get_it_service.dart';
 import 'package:e_commerce_app/core/services/shared_preference_singlton.dart';
 import 'package:e_commerce_app/core/utils/app_colors.dart';

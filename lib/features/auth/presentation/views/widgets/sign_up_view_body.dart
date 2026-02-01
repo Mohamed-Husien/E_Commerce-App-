@@ -1,6 +1,8 @@
 import 'package:e_commerce_app/constants.dart';
+import 'package:e_commerce_app/core/utils/validator_class.dart';
 import 'package:e_commerce_app/core/widgets/custom_button.dart';
 import 'package:e_commerce_app/core/widgets/custom_text_form_field.dart';
+import 'package:e_commerce_app/core/widgets/password_field.dart';
 import 'package:e_commerce_app/features/auth/presentation/manager/cubits/sign_up_cubit/sign_up_cubit.dart';
 import 'package:e_commerce_app/features/auth/presentation/views/widgets/custom_already_have_account_widget.dart';
 import 'package:e_commerce_app/features/auth/presentation/views/widgets/terms_and_conditions_widget.dart';
@@ -33,6 +35,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                   height: 28,
                 ),
                 CustomTextFormField(
+                  validator: (value) => Validators.name(value),
                   onSaved: (value) {
                     name = value!;
                   },
@@ -43,6 +46,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                   height: 16,
                 ),
                 CustomTextFormField(
+                  validator: (value) => Validators.email(value),
                   onSaved: (value) {
                     email = value!;
                   },
@@ -52,16 +56,10 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 const SizedBox(
                   height: 16,
                 ),
-                CustomTextFormField(
+                PasswordField(
                   onSaved: (value) {
                     passWord = value!;
                   },
-                  hintText: 'كلمة المرور',
-                  textInputType: TextInputType.visiblePassword,
-                  suffixIcon: const Icon(
-                    Icons.visibility,
-                    color: Color(0xffC9CECF),
-                  ),
                 ),
                 const SizedBox(
                   height: 16,
