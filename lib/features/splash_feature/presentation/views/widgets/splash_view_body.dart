@@ -1,7 +1,7 @@
 import 'package:e_commerce_app/constants.dart';
 import 'package:e_commerce_app/core/services/shared_preference_singlton.dart';
 import 'package:e_commerce_app/core/utils/app_images.dart';
-import 'package:e_commerce_app/features/auth/presentation/views/login_view.dart';
+import 'package:e_commerce_app/features/auth/presentation/views/signin_view.dart';
 import 'package:e_commerce_app/features/onBoarding/presentation/views/on_boarding_view.dart';
 import 'package:flutter/material.dart';
 import 'package:svg_flutter/svg.dart';
@@ -47,7 +47,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
       const Duration(seconds: 3),
       () {
         if (isOnBoardingViewSeen) {
-          Navigator.pushReplacementNamed(context, LoginView.routeName);
+          Navigator.pushReplacementNamed(context, SignInView.routeName);
         } else {
           Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
         }

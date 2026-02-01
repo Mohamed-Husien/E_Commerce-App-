@@ -3,7 +3,7 @@ import 'package:e_commerce_app/constants.dart';
 import 'package:e_commerce_app/core/services/shared_preference_singlton.dart';
 import 'package:e_commerce_app/core/utils/app_colors.dart';
 import 'package:e_commerce_app/core/widgets/custom_button.dart';
-import 'package:e_commerce_app/features/auth/presentation/views/login_view.dart';
+import 'package:e_commerce_app/features/auth/presentation/views/signin_view.dart';
 import 'package:e_commerce_app/features/onBoarding/presentation/views/widgets/on_boarding_page_view.dart';
 import 'package:flutter/material.dart';
 
@@ -60,7 +60,8 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
             child: CustomButton(
               onPressed: () {
                 Prefes.setBool(kIsOnBoardingViewSeen, true);
-                Navigator.of(context).pushReplacementNamed(LoginView.routeName);
+                Navigator.of(context)
+                    .pushReplacementNamed(SignInView.routeName);
               },
               text: 'ابدأ الان',
             ),
