@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce_app/core/errors/exceptions.dart';
 import 'package:e_commerce_app/core/errors/failures.dart';
@@ -22,6 +24,7 @@ class AuthRepoImpl implements AuthRepo {
         ServerFailure(e.message),
       );
     } catch (e) {
+      log("Exception in createUserWithEmailAndPassword AuthRepoImpl: $e");
       return left(
         ServerFailure('حدث خطأ غير متوقع'),
       );
