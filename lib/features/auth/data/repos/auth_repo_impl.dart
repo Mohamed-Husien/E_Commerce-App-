@@ -57,12 +57,23 @@ class AuthRepoImpl implements AuthRepo {
       return right(
         UserModel.fromUserModel(user),
       );
-    } on CustomException catch (e) {
-      return left(
-        ServerFailure(e.message),
-      );
     } catch (e) {
       log("Exception in signInWithGoogle AuthRepoImpl: $e");
+      return left(
+        ServerFailure('حدث خطأ غير متوقع'),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> signInWithFacebook() async {
+    try {
+      var user = await fireBaseAuthService.signInWithFacebook();
+      return right(
+        UserModel.fromUserModel(user),
+      );
+    } catch (e) {
+      log("Exception in signInWithFacebook AuthRepoImpl: $e");
       return left(
         ServerFailure('حدث خطأ غير متوقع'),
       );

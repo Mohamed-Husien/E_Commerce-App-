@@ -36,10 +36,11 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
+  flutter_facebook_auth:
   flutter_localizations:
     sdk: flutter
   get_it: ^9.2.0
-  google_sign_in:
+  google_sign_in: null
   intl_utils: null
   modal_progress_hud_nsn: ^0.5.1
   shared_preferences: null
