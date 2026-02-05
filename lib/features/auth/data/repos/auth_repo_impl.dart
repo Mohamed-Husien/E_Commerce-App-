@@ -49,4 +49,23 @@ class AuthRepoImpl implements AuthRepo {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, UserEntity>> signInWithGoogle() async {
+    try {
+      var user = await fireBaseAuthService.signInWithGoogle();
+      return right(
+        UserModel.fromUserModel(user),
+      );
+    } on CustomException catch (e) {
+      return left(
+        ServerFailure(e.message),
+      );
+    } catch (e) {
+      log("Exception in signInWithGoogle AuthRepoImpl: $e");
+      return left(
+        ServerFailure('حدث خطأ غير متوقع'),
+      );
+    }
+  }
 }

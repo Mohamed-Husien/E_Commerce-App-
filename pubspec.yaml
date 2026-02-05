@@ -39,6 +39,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   get_it: ^9.2.0
+  google_sign_in:
   intl_utils: null
   modal_progress_hud_nsn: ^0.5.1
   shared_preferences: null
