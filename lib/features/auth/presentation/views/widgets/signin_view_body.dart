@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:e_commerce_app/constants.dart';
 import 'package:e_commerce_app/core/utils/app_colors.dart';
 import 'package:e_commerce_app/core/utils/app_images.dart';
@@ -106,14 +108,20 @@ class _SignInViewBodyState extends State<SignInViewBody> {
               const SizedBox(
                 height: 16,
               ),
-              SocialLoginButton(
-                title: "تسجيل بواسطة أبل",
-                onPressed: () {},
-                image: Assets.imagesApplIcon,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
+              Platform.isIOS
+                  ? Column(
+                      children: [
+                        SocialLoginButton(
+                          title: "تسجيل بواسطة أبل",
+                          onPressed: () {},
+                          image: Assets.imagesApplIcon,
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                      ],
+                    )
+                  : const SizedBox(),
               SocialLoginButton(
                 title: "تسجيل بواسطة فيسبوك",
                 onPressed: () {
