@@ -71,7 +71,13 @@ class AuthRepoImpl implements AuthRepo {
     try {
       user = await fireBaseAuthService.signInWithGoogle();
       var userEntity = UserModel.fromUserModel(user);
-      await addUserData(user: userEntity);
+      var isUserExists = await databaseService.checkIfDocumentExists(
+          path: BackendEndpoint.isUserExists, documentId: user.uid);
+      if (isUserExists) {
+        await getUserData(uId: user.uid);
+      } else {
+        await addUserData(user: userEntity);
+      }
       return right(userEntity);
     } catch (e) {
       await deleteUser(user);
@@ -84,15 +90,36 @@ class AuthRepoImpl implements AuthRepo {
 
 //--------------------------------------------------------------------------------
   @override
+  @override
   Future<Either<Failure, UserEntity>> signInWithFacebook() async {
-    User? user;
     try {
-      user = await fireBaseAuthService.signInWithFacebook();
-      var userEntity = UserModel.fromUserModel(user);
-      await addUserData(user: userEntity);
-      return right(userEntity);
+      final user = await fireBaseAuthService.signInWithFacebook();
+
+      final isUserExists = await databaseService.checkIfDocumentExists(
+        path: BackendEndpoint.isUserExists,
+        documentId: user.uid,
+      );
+
+      if (isUserExists) {
+        final userEntity = await getUserData(uId: user.uid);
+        return right(userEntity);
+      } else {
+        final userEntity = UserModel.fromUserModel(user);
+        await addUserData(user: userEntity);
+        return right(userEntity);
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'account-exists-with-different-credential') {
+        return left(
+          ServerFailure(
+              'هذا الحساب مسجل باستخدام Google. الرجاء تسجيل الدخول بواسطة Google.'),
+        );
+      }
+
+      return left(
+        ServerFailure('خطأ في تسجيل الدخول بواسطة فيسبوك'),
+      );
     } catch (e) {
-      await deleteUser(user);
       log("Exception in signInWithFacebook AuthRepoImpl: $e");
       return left(
         ServerFailure('حدث خطأ غير متوقع'),
