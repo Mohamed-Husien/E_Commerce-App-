@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce_app/core/errors/exceptions.dart';
 import 'package:e_commerce_app/core/errors/failures.dart';
+import 'package:e_commerce_app/core/services/data_base_service.dart';
 import 'package:e_commerce_app/core/services/fire_base_auth_service.dart';
-import 'package:e_commerce_app/core/services/firestore_service.dart';
 import 'package:e_commerce_app/core/utils/backend_endpoint.dart';
 import 'package:e_commerce_app/features/auth/data/models/user_model.dart';
 import 'package:e_commerce_app/features/auth/domain/entities/user_entity.dart';
@@ -13,10 +13,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthRepoImpl implements AuthRepo {
   final FireBaseAuthService fireBaseAuthService;
-  final FirestoreService fireStoreService;
+  final DataBaseService databaseService;
 
   AuthRepoImpl(
-      {required this.fireStoreService, required this.fireBaseAuthService});
+      {required this.databaseService, required this.fireBaseAuthService});
   @override
   Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword(
       String email, String password, String name) async {
@@ -50,7 +50,8 @@ class AuthRepoImpl implements AuthRepo {
     try {
       var user =
           await fireBaseAuthService.signInWithEmailAndPassword(email, password);
-      return right(UserModel.fromUserModel(user));
+      var userEntity = await getUserData(uId: user.uid);
+      return right(userEntity);
     } on CustomException catch (e) {
       return left(
         ServerFailure(e.message),
@@ -101,13 +102,23 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future addUserData({required UserEntity user}) async {
-    await fireStoreService.addData(
-        path: BackendEndpoint.addUserData, data: user.toMap());
+    await databaseService.addData(
+      path: BackendEndpoint.addUserData,
+      data: user.toMap(),
+      documentId: user.uId,
+    );
   }
 
   Future<void> deleteUser(User? user) async {
     if (user != null) {
       await fireBaseAuthService.deleteUser();
     }
+  }
+
+  @override
+  Future<UserEntity> getUserData({required String uId}) async {
+    var userData = await databaseService.getData(
+        path: BackendEndpoint.getUserData, documentId: uId);
+    return UserModel.fromMap(userData);
   }
 }

@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/core/services/data_base_service.dart';
 import 'package:e_commerce_app/core/services/fire_base_auth_service.dart';
 import 'package:e_commerce_app/core/services/firestore_service.dart';
 import 'package:e_commerce_app/features/auth/data/repos/auth_repo_impl.dart';
@@ -10,13 +11,13 @@ void setupGetit() {
   getIt.registerLazySingleton<FireBaseAuthService>(
     () => FireBaseAuthService(),
   );
-  getIt.registerLazySingleton<FirestoreService>(
+  getIt.registerLazySingleton<DataBaseService>(
     () => FirestoreService(),
   );
   getIt.registerLazySingleton<AuthRepo>(
     () => AuthRepoImpl(
       fireBaseAuthService: getIt<FireBaseAuthService>(),
-      fireStoreService: getIt<FirestoreService>(),
+      databaseService: getIt<DataBaseService>(),
     ),
   );
 }
