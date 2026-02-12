@@ -15,7 +15,10 @@ class SignUpViewBodyBlocConsumer extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<SignUpCubit, SignUpState>(
       listener: (context, state) {
-        if (state is SignUpSuccess) {}
+        if (state is SignUpSuccess) {
+          snackBar(context, "تم إنشاء الحساب بنجاح");
+          Navigator.pop(context);
+        }
         if (state is SignUpFailure) {
           buildErrorBar(context, state.errorMessage);
         }
@@ -30,4 +33,12 @@ class SignUpViewBodyBlocConsumer extends StatelessWidget {
       },
     );
   }
+}
+
+void snackBar(BuildContext context, String s) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text(s),
+    ),
+  );
 }
