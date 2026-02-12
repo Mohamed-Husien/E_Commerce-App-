@@ -28,9 +28,7 @@ class AuthRepoImpl implements AuthRepo {
       await addUserData(user: userEntity);
       return right(userEntity);
     } on CustomException catch (e) {
-      if (user != null) {
-        await fireBaseAuthService.deleteUser();
-      }
+      await deleteUser(user);
       return left(
         ServerFailure(e.message),
       );
@@ -68,12 +66,14 @@ class AuthRepoImpl implements AuthRepo {
 //--------------------------------------------------------------------------------
   @override
   Future<Either<Failure, UserEntity>> signInWithGoogle() async {
+    User? user;
     try {
-      var user = await fireBaseAuthService.signInWithGoogle();
-      return right(
-        UserModel.fromUserModel(user),
-      );
+      user = await fireBaseAuthService.signInWithGoogle();
+      var userEntity = UserModel.fromUserModel(user);
+      await addUserData(user: userEntity);
+      return right(userEntity);
     } catch (e) {
+      await deleteUser(user);
       log("Exception in signInWithGoogle AuthRepoImpl: $e");
       return left(
         ServerFailure('حدث خطأ غير متوقع'),
@@ -84,12 +84,14 @@ class AuthRepoImpl implements AuthRepo {
 //--------------------------------------------------------------------------------
   @override
   Future<Either<Failure, UserEntity>> signInWithFacebook() async {
+    User? user;
     try {
-      var user = await fireBaseAuthService.signInWithFacebook();
-      return right(
-        UserModel.fromUserModel(user),
-      );
+      user = await fireBaseAuthService.signInWithFacebook();
+      var userEntity = UserModel.fromUserModel(user);
+      await addUserData(user: userEntity);
+      return right(userEntity);
     } catch (e) {
+      await deleteUser(user);
       log("Exception in signInWithFacebook AuthRepoImpl: $e");
       return left(
         ServerFailure('حدث خطأ غير متوقع'),
@@ -101,5 +103,11 @@ class AuthRepoImpl implements AuthRepo {
   Future addUserData({required UserEntity user}) async {
     await fireStoreService.addData(
         path: BackendEndpoint.addUserData, data: user.toMap());
+  }
+
+  Future<void> deleteUser(User? user) async {
+    if (user != null) {
+      await fireBaseAuthService.deleteUser();
+    }
   }
 }
