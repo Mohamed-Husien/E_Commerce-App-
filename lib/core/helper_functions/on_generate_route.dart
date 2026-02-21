@@ -1,5 +1,6 @@
 import 'package:e_commerce_app/features/auth/presentation/views/signin_view.dart';
 import 'package:e_commerce_app/features/auth/presentation/views/sign_up_view.dart';
+import 'package:e_commerce_app/features/home/presentation/views/home_view.dart';
 import 'package:e_commerce_app/features/onBoarding/presentation/views/on_boarding_view.dart';
 import 'package:e_commerce_app/features/splash_feature/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,10 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case OnBoardingView.routeName:
       return MaterialPageRoute(
         builder: (context) => const OnBoardingView(),
+      );
+    case HomeView.routeName:
+      return MaterialPageRoute(
+        builder: (context) => const HomeView(),
       );
     default:
       return MaterialPageRoute(
