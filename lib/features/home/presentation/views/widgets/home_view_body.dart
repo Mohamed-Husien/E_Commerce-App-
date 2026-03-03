@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/constants.dart';
+import 'package:e_commerce_app/core/widgets/fruit_item.dart';
 import 'package:e_commerce_app/core/widgets/search_text_field.dart';
 import 'package:e_commerce_app/features/home/presentation/views/widgets/best_selling_header.dart';
 import 'package:e_commerce_app/features/home/presentation/views/widgets/custom_home_app_bar.dart';
@@ -15,37 +16,22 @@ class HomeViewBody extends StatelessWidget {
       child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
-            child: SizedBox(
-              height: 16,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 16),
+                CustomHomeAppBar(),
+                SizedBox(height: 16),
+                SearchTextField(),
+                SizedBox(height: 12),
+                FeaturedList(),
+                SizedBox(height: 12),
+                BestSellingHeader(),
+                SizedBox(height: 8),
+                FruitItem(),
+              ],
             ),
           ),
-          SliverToBoxAdapter(
-            child: CustomHomeAppBar(),
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 16,
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: SearchTextField(),
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 12,
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: FeaturedList(),
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 12,
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: BestSellingHeader(),
-          )
         ],
       ),
     );
