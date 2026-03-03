@@ -1,7 +1,7 @@
 import 'package:e_commerce_app/core/utils/app_images.dart';
 import 'package:e_commerce_app/core/utils/app_text_styles.dart';
+import 'package:e_commerce_app/core/widgets/notification_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:svg_flutter/svg.dart';
 
 class CustomHomeAppBar extends StatelessWidget {
   const CustomHomeAppBar({super.key});
@@ -9,6 +9,7 @@ class CustomHomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 0.0),
       title: Text(
         "صباح الخير !..",
         style: TextStyles.regular16.copyWith(
@@ -20,16 +21,7 @@ class CustomHomeAppBar extends StatelessWidget {
             color: const Color(0xff0C0D0D),
           )),
       leading: Image.asset(Assets.imagesProfileImage),
-      trailing: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: const ShapeDecoration(
-          color: Color(0xffEEF8ED),
-          shape: OvalBorder(),
-        ),
-        child: SvgPicture.asset(
-          Assets.imagesNotification,
-        ),
-      ),
+      trailing: const NotificationWidget(),
     );
   }
 }
