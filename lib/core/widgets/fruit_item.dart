@@ -2,7 +2,6 @@ import 'package:e_commerce_app/core/utils/app_colors.dart';
 import 'package:e_commerce_app/core/utils/app_images.dart';
 import 'package:e_commerce_app/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:svg_flutter/svg.dart';
 
 class FruitItem extends StatelessWidget {
   const FruitItem({super.key});
@@ -10,8 +9,6 @@ class FruitItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 240,
-      width: 200,
       decoration: ShapeDecoration(
         color: const Color(0xffF3F5F7),
         shape: RoundedRectangleBorder(
@@ -37,23 +34,30 @@ class FruitItem extends StatelessWidget {
                 Image.asset(Assets.imagesWatermelonTest),
                 const SizedBox(height: 24),
                 ListTile(
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                  ),
                   title: const Text(
                     "بطيخ",
                     style: TextStyles.semiBold13,
                   ),
-                  subtitle: Row(
-                    children: [
-                      Text(
-                        "20جنية",
-                        style: TextStyles.semiBold13
-                            .copyWith(color: AppColors.lightSecondaryColor),
-                      ),
-                      Text(
-                        " / الكيلو",
-                        style: TextStyles.semiBold13
-                            .copyWith(color: AppColors.lightSecondaryColor),
-                      ),
-                    ],
+                  subtitle: Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "20جنية",
+                          style: TextStyles.semiBold13.copyWith(
+                            color: AppColors.lightSecondaryColor,
+                          ),
+                        ),
+                        TextSpan(
+                          text: " / الكيلو",
+                          style: TextStyles.semiBold13.copyWith(
+                            color: AppColors.lightSecondaryColor,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   trailing: const CircleAvatar(
                     backgroundColor: AppColors.lightPrimaryColor,
