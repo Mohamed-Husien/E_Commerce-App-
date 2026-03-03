@@ -2,13 +2,20 @@ import 'package:e_commerce_app/features/home/domain/entities/bottom_navigation_b
 import 'package:e_commerce_app/features/home/presentation/views/widgets/navigation_bar_item.dart';
 import 'package:flutter/material.dart';
 
-class CustomBottomNavigationBar extends StatelessWidget {
+class CustomBottomNavigationBar extends StatefulWidget {
   const CustomBottomNavigationBar({super.key});
 
   @override
+  State<CustomBottomNavigationBar> createState() =>
+      _CustomBottomNavigationBarState();
+}
+
+class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
+  int currentIndex = 0;
+  @override
   Widget build(BuildContext context) {
     return Container(
-      width: 375,
+      width: double.infinity,
       height: 70,
       decoration: const ShapeDecoration(
         color: Colors.white,
@@ -29,14 +36,24 @@ class CustomBottomNavigationBar extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: bottomNavigationBarItems.map(
-          (e) {
-            return NavigationBarItem(
-              bottomNavigationBarEntity: e,
-              isActive: false,
-            );
-          },
-        ).toList(),
+        children: bottomNavigationBarItems.asMap().entries.map((entry) {
+          int index = entry.key;
+          BottomNavigationBarEntity item = entry.value;
+          return Expanded(
+            flex: currentIndex == index ? 3 : 1,
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  currentIndex = index;
+                });
+              },
+              child: NavigationBarItem(
+                isActive: currentIndex == index,
+                bottomNavigationBarEntity: item,
+              ),
+            ),
+          );
+        }).toList(),
       ),
     );
   }
