@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/core/utils/app_text_styles.dart';
+import 'package:e_commerce_app/features/best_selling_fruits/presentation/views/best_selling_fruits_view.dart';
 import 'package:flutter/material.dart';
 
 class BestSellingHeader extends StatelessWidget {
@@ -6,22 +7,27 @@ class BestSellingHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const Text(
-          "الأكثر مبيعًا",
-          style: TextStyles.bold16,
-        ),
-        Text(
-          "المزيد",
-          style: TextStyles.regular13.copyWith(
-            color: const Color(
-              0xff949D9E,
-            ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, BestSellingFruitsView.routeName);
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(
+            "الأكثر مبيعًا",
+            style: TextStyles.bold16,
           ),
-        )
-      ],
+          Text(
+            "المزيد",
+            style: TextStyles.regular13.copyWith(
+              color: const Color(
+                0xff949D9E,
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
