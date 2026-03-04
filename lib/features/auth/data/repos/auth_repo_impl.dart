@@ -54,6 +54,7 @@ class AuthRepoImpl implements AuthRepo {
       var user =
           await fireBaseAuthService.signInWithEmailAndPassword(email, password);
       var userEntity = await getUserData(uId: user.uid);
+      saveUserData(user: userEntity);
       return right(userEntity);
     } on CustomException catch (e) {
       return left(
@@ -81,6 +82,7 @@ class AuthRepoImpl implements AuthRepo {
       } else {
         await addUserData(user: userEntity);
       }
+      saveUserData(user: userEntity); // save user data in shared preferences
       return right(userEntity);
     } catch (e) {
       await deleteUser(user);
@@ -92,7 +94,7 @@ class AuthRepoImpl implements AuthRepo {
   }
 
 //--------------------------------------------------------------------------------
-  @override
+
   @override
   Future<Either<Failure, UserEntity>> signInWithFacebook() async {
     try {
@@ -105,6 +107,7 @@ class AuthRepoImpl implements AuthRepo {
 
       if (isUserExists) {
         final userEntity = await getUserData(uId: user.uid);
+        saveUserData(user: userEntity); //save user data in shared preferences
         return right(userEntity);
       } else {
         final userEntity = UserModel.fromUserModel(user);

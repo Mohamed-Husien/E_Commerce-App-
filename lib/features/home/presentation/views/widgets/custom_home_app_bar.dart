@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/core/helper_functions/get_user.dart';
 import 'package:e_commerce_app/core/utils/app_images.dart';
 import 'package:e_commerce_app/core/utils/app_text_styles.dart';
 import 'package:e_commerce_app/core/widgets/notification_widget.dart';
@@ -16,7 +17,7 @@ class CustomHomeAppBar extends StatelessWidget {
           color: const Color(0xff949D9E),
         ),
       ),
-      subtitle: Text("أحمد مصطفي",
+      subtitle: Text(getUser().name,
           style: TextStyles.bold16.copyWith(
             color: const Color(0xff0C0D0D),
           )),
