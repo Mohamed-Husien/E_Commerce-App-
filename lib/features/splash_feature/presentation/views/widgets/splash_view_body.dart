@@ -3,7 +3,7 @@ import 'package:e_commerce_app/core/services/fire_base_auth_service.dart';
 import 'package:e_commerce_app/core/services/shared_preference_singlton.dart';
 import 'package:e_commerce_app/core/utils/app_images.dart';
 import 'package:e_commerce_app/features/auth/presentation/views/signin_view.dart';
-import 'package:e_commerce_app/features/home/presentation/views/home_view.dart';
+import 'package:e_commerce_app/features/home/presentation/views/main_view.dart';
 import 'package:e_commerce_app/features/onBoarding/presentation/views/on_boarding_view.dart';
 import 'package:flutter/material.dart';
 import 'package:svg_flutter/svg.dart';
@@ -51,7 +51,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
         if (isOnBoardingViewSeen) {
           var isLoggedIn = FireBaseAuthService().isUserLoggedIn();
           if (isLoggedIn) {
-            Navigator.pushReplacementNamed(context, HomeView.routeName);
+            Navigator.pushReplacementNamed(context, MainView.routeName);
           } else
             Navigator.pushReplacementNamed(context, SignInView.routeName);
         } else {

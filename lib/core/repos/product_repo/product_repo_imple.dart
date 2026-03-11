@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce_app/core/entities/product_entity.dart';
 import 'package:e_commerce_app/core/errors/failures.dart';
 import 'package:e_commerce_app/core/models/product_model.dart';
 import 'package:e_commerce_app/core/repos/product_repo/product_repo.dart';
 import 'package:e_commerce_app/core/services/data_base_service.dart';
+import 'package:e_commerce_app/core/utils/backend_endpoint.dart';
 
 class ProductRepoImple extends ProductRepo {
   final DataBaseService dataBaseService;
@@ -11,18 +14,20 @@ class ProductRepoImple extends ProductRepo {
   @override
   Future<Either<Failure, List<ProductEntity>>> getBestSellingProducts() async {
     try {
-      var data = await dataBaseService.getData(path: "products", query: {
-        'limit': 10,
-        'orderBy': 'sellingCount',
-        'descending': true,
-      }) as Map<String, dynamic>;
-      List<ProductModel> products =
-          data.values.map((e) => ProductModel.fromJson(e)).toList();
-      List<ProductEntity> productEntities =
-          products.map((e) => e.toEntity()).toList();
-      return Right(productEntities);
+      var data = await dataBaseService.getData(
+          path: BackendEndpoint.getProducts,
+          query: {
+            'limit': 10,
+            'orderBy': 'sellingCount',
+            'descending': true
+          }) as List<Map<String, dynamic>>;
+
+      List<ProductEntity> products =
+          data.map((e) => ProductModel.fromJson(e).toEntity()).toList();
+      return right(products);
     } catch (e) {
-      return Left(ServerFailure("Faild to get products"));
+      log("Failed to fetch best selling products: $e");
+      return left(ServerFailure('Failed to get products'));
     }
   }
 
