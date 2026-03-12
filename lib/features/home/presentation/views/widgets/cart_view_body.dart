@@ -1,9 +1,8 @@
 import 'package:e_commerce_app/constants.dart';
 import 'package:e_commerce_app/core/cubits/proucts_cubit/products_cubit.dart';
 import 'package:e_commerce_app/core/widgets/custom_app_bar.dart';
-import 'package:e_commerce_app/core/widgets/search_text_field.dart';
+import 'package:e_commerce_app/features/home/presentation/views/widgets/cart_item.dart';
 import 'package:e_commerce_app/features/home/presentation/views/widgets/cart_section_header.dart';
-import 'package:e_commerce_app/features/home/presentation/views/widgets/products_grid_view_bloc_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,13 +31,13 @@ class _CartViewBodyState extends State<CartViewBody> {
                 child: buildAppBar(context,
                     title: "السلة", showNotification: false)),
             const SliverToBoxAdapter(child: SizedBox(height: 16)),
-            const SliverToBoxAdapter(child: SearchTextField()),
-            const SliverToBoxAdapter(child: SizedBox(height: 12)),
             const SliverToBoxAdapter(
               child: CartSectionHeader(),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 8)),
-            const ProductGridViewBlocBuilder(),
+            const SliverToBoxAdapter(
+              child: CartItem(),
+            )
           ],
         ));
   }
