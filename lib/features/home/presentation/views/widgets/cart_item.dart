@@ -1,6 +1,8 @@
+import 'package:e_commerce_app/core/utils/app_colors.dart';
 import 'package:e_commerce_app/core/utils/app_images.dart';
 import 'package:e_commerce_app/core/utils/app_text_styles.dart';
 import 'package:e_commerce_app/core/widgets/custom_network_image.dart';
+import 'package:e_commerce_app/features/home/presentation/views/widgets/cart_item_action_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:svg_flutter/svg.dart';
 
@@ -29,7 +31,8 @@ class CartItem extends StatelessWidget {
           ),
           Expanded(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
@@ -38,14 +41,31 @@ class CartItem extends StatelessWidget {
                       style: TextStyles.bold13,
                     ),
                     const Spacer(),
-                    IconButton(
-                      onPressed: () {},
-                      icon: SvgPicture.asset(
+                    GestureDetector(
+                      onTap: () {},
+                      child: SvgPicture.asset(
                         Assets.imagesTrash,
                       ),
                     )
                   ],
-                )
+                ),
+                Text(
+                  "3كم",
+                  textAlign: TextAlign.right,
+                  style: TextStyles.regular13.copyWith(
+                    color: AppColors.secondaryColor,
+                  ),
+                ),
+                Row(
+                  children: [
+                    const CartItemActionButtons(),
+                    const Spacer(),
+                    Text("60 جنية",
+                        style: TextStyles.bold16.copyWith(
+                          color: AppColors.secondaryColor,
+                        ))
+                  ],
+                ),
               ],
             ),
           ),
