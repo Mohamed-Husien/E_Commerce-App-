@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:e_commerce_app/core/entities/product_entity.dart';
 
 ProductEntity getDummyProduct() {
@@ -8,14 +6,13 @@ ProductEntity getDummyProduct() {
     description: "Fresh and juicy apples",
     price: 1.99,
     productCode: '',
-    image: File(''),
     isFeatured: true,
     isOrganic: true,
     expirationMonths: 6,
     numberOfCalories: 100,
     unitAmount: 120,
     reviews: [],
-    imageURL: 'https://example.com/images/apple.jpg',
+    imageURL: null,
   );
 }
 

@@ -8,6 +8,7 @@ class BestSellingGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverGrid.builder(
+        itemCount: products.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           mainAxisSpacing: 8,
@@ -15,7 +16,9 @@ class BestSellingGridView extends StatelessWidget {
           childAspectRatio: 170 / 230,
         ),
         itemBuilder: (context, index) {
-          return const FruitItem();
+          return FruitItem(
+            product: products[index],
+          );
         });
   }
 }

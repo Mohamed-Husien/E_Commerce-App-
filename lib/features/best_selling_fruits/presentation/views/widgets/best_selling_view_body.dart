@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/constants.dart';
+import 'package:e_commerce_app/core/helper_functions/get_dummy_products.dart';
 import 'package:e_commerce_app/core/utils/app_text_styles.dart';
 import 'package:e_commerce_app/core/widgets/fruit_item.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class BestSellingViewBody extends StatelessWidget {
                   childAspectRatio: 170 / 230,
                 ),
                 itemBuilder: (context, index) {
-                  return const FruitItem();
+                  return FruitItem(product: getDummyProduct());
                 }),
           ],
         ),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:e_commerce_app/core/cubits/proucts_cubit/products_cubit.dart';
 import 'package:e_commerce_app/core/helper_functions/get_dummy_products.dart';
 import 'package:e_commerce_app/core/widgets/custom_error_widget.dart';
@@ -23,6 +25,7 @@ class BestSellingGridViewBlocBuilder extends StatelessWidget {
             ),
           );
         } else if (state is ProductsSuccess) {
+          log(state.products.toString());
           return BestSellingGridView(
             products: state.products,
           );

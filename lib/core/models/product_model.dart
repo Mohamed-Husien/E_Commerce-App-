@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:e_commerce_app/core/entities/product_entity.dart';
+import 'package:e_commerce_app/core/helper_functions/get_avg_rating.dart';
 import 'package:e_commerce_app/core/models/review_model.dart';
 
 class ProductModel {
@@ -8,14 +7,13 @@ class ProductModel {
   final String productCode;
   final num price;
   final String description;
-  final File image;
   final bool isFeatured;
   String? imageURL;
   final int expirationMonths;
   bool isOrganic = false;
   final int numberOfCalories;
   final int unitAmount;
-  final num avgRating = 0;
+  final num avgRating;
   final num ratingCount = 0;
   final int sellingCount;
   final List<ReviewModel> reviews;
@@ -24,9 +22,9 @@ class ProductModel {
       required this.productCode,
       required this.price,
       required this.description,
-      required this.image,
       required this.isFeatured,
       required this.isOrganic,
+      required this.avgRating,
       required this.expirationMonths,
       required this.numberOfCalories,
       required this.unitAmount,
@@ -35,20 +33,26 @@ class ProductModel {
       this.imageURL});
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
+    List<ReviewModel> reviewsList = [];
+
+    if (json['reviews'] != null) {
+      reviewsList = (json['reviews'] as List)
+          .map((e) => ReviewModel.fromJson(Map<String, dynamic>.from(e)))
+          .toList();
+    }
     return ProductModel(
+      avgRating: getAvgRating(reviewsList),
       name: json['name'],
       productCode: json['productCode'],
       price: json['price'],
       description: json['description'],
-      image: File(json['imageURL']),
       isFeatured: json['isFeatured'],
       expirationMonths: json['expirationMonths'],
       isOrganic: json['isOrganic'],
       numberOfCalories: json['numberOfCalories'],
       unitAmount: json['unitAmount'],
-      reviews: (json['reviews'] as List)
-          .map((reviewJson) => ReviewModel.fromJson(reviewJson))
-          .toList(),
+      imageURL: json["imageURL"],
+      reviews: reviewsList,
       sellingCount: json['sellingCount'] ?? 0,
     );
   }
@@ -64,7 +68,6 @@ class ProductModel {
       isOrganic: isOrganic,
       numberOfCalories: numberOfCalories,
       unitAmount: unitAmount,
-      image: image,
       reviews: reviews.map((review) => review.toEntity()).toList(),
     );
   }

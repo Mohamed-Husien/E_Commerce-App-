@@ -24,8 +24,8 @@ void setupGetit() {
   );
 
   getIt.registerLazySingleton<ProductRepo>(
-    () => ProductRepoImple(
-      dataBaseService: getIt<DataBaseService>(),
+    () => ProductsRepoImpl(
+      getIt<DataBaseService>(),
     ),
   );
 }

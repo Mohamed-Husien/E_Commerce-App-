@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:e_commerce_app/core/entities/review_entity.dart';
 
 class ProductEntity {
@@ -7,7 +5,6 @@ class ProductEntity {
   final String productCode;
   final num price;
   final String description;
-  final File image;
   final bool isFeatured;
   String? imageURL;
   final int expirationMonths;
@@ -22,7 +19,6 @@ class ProductEntity {
       required this.productCode,
       required this.price,
       required this.description,
-      required this.image,
       required this.isFeatured,
       required this.isOrganic,
       required this.expirationMonths,

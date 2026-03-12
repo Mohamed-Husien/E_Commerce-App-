@@ -8,13 +8,14 @@ import 'package:e_commerce_app/core/repos/product_repo/product_repo.dart';
 import 'package:e_commerce_app/core/services/data_base_service.dart';
 import 'package:e_commerce_app/core/utils/backend_endpoint.dart';
 
-class ProductRepoImple extends ProductRepo {
-  final DataBaseService dataBaseService;
-  ProductRepoImple({required this.dataBaseService});
+class ProductsRepoImpl extends ProductRepo {
+  final DataBaseService databaseService;
+
+  ProductsRepoImpl(this.databaseService);
   @override
   Future<Either<Failure, List<ProductEntity>>> getBestSellingProducts() async {
     try {
-      var data = await dataBaseService.getData(
+      var data = await databaseService.getData(
           path: BackendEndpoint.getProducts,
           query: {
             'limit': 10,
@@ -24,9 +25,10 @@ class ProductRepoImple extends ProductRepo {
 
       List<ProductEntity> products =
           data.map((e) => ProductModel.fromJson(e).toEntity()).toList();
+      log(products.toString());
       return right(products);
     } catch (e) {
-      log("Failed to fetch best selling products: $e");
+      log(e.toString());
       return left(ServerFailure('Failed to get products'));
     }
   }
@@ -34,15 +36,14 @@ class ProductRepoImple extends ProductRepo {
   @override
   Future<Either<Failure, List<ProductEntity>>> getProducts() async {
     try {
-      var data = await dataBaseService.getData(path: "products")
-          as Map<String, dynamic>;
-      List<ProductModel> products =
-          data.values.map((e) => ProductModel.fromJson(e)).toList();
-      List<ProductEntity> productEntities =
-          products.map((e) => e.toEntity()).toList();
-      return Right(productEntities);
+      var data = await databaseService.getData(
+          path: BackendEndpoint.getProducts) as List<Map<String, dynamic>>;
+
+      List<ProductEntity> products =
+          data.map((e) => ProductModel.fromJson(e).toEntity()).toList();
+      return right(products);
     } catch (e) {
-      return Left(ServerFailure("Faild to get products"));
+      return left(ServerFailure('Failed to get products'));
     }
   }
 }
