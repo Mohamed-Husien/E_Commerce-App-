@@ -1,7 +1,7 @@
 import 'package:e_commerce_app/constants.dart';
 import 'package:e_commerce_app/core/cubits/proucts_cubit/products_cubit.dart';
 import 'package:e_commerce_app/core/widgets/search_text_field.dart';
-import 'package:e_commerce_app/features/home/presentation/views/widgets/best_selling_grid_view_bloc_builder.dart';
+import 'package:e_commerce_app/features/home/presentation/views/widgets/products_grid_view_bloc_builder.dart';
 import 'package:e_commerce_app/features/home/presentation/views/widgets/best_selling_header.dart';
 import 'package:e_commerce_app/features/home/presentation/views/widgets/custom_home_app_bar.dart';
 import 'package:e_commerce_app/features/home/presentation/views/widgets/featured_list.dart';
@@ -39,7 +39,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
             SliverToBoxAdapter(child: SizedBox(height: 12)),
             SliverToBoxAdapter(child: BestSellingHeader()),
             SliverToBoxAdapter(child: SizedBox(height: 8)),
-            BestSellingGridViewBlocBuilder(),
+            ProductGridViewBlocBuilder(),
           ],
         ));
   }
