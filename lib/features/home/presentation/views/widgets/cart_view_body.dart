@@ -1,7 +1,7 @@
-import 'package:e_commerce_app/constants.dart';
 import 'package:e_commerce_app/core/cubits/proucts_cubit/products_cubit.dart';
 import 'package:e_commerce_app/core/widgets/custom_app_bar.dart';
-import 'package:e_commerce_app/features/home/presentation/views/widgets/cart_item.dart';
+import 'package:e_commerce_app/core/widgets/custom_button.dart';
+import 'package:e_commerce_app/features/home/presentation/views/widgets/cart_item_list.dart';
 import 'package:e_commerce_app/features/home/presentation/views/widgets/cart_section_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,9 +22,9 @@ class _CartViewBodyState extends State<CartViewBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
-        child: CustomScrollView(
+    return Stack(
+      children: [
+        CustomScrollView(
           slivers: [
             const SliverToBoxAdapter(child: SizedBox(height: 16)),
             SliverToBoxAdapter(
@@ -36,9 +36,20 @@ class _CartViewBodyState extends State<CartViewBody> {
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 8)),
             const SliverToBoxAdapter(
-              child: CartItem(),
-            )
+              child: CustomDivider(),
+            ),
+            const CarItemsList(),
+            const SliverToBoxAdapter(
+              child: CustomDivider(),
+            ),
           ],
-        ));
+        ),
+        Positioned(
+            right: 16,
+            left: 16,
+            bottom: MediaQuery.sizeOf(context).height * .07,
+            child: CustomButton(onPressed: () {}, text: " الدفع بقيمة 120"))
+      ],
+    );
   }
 }
