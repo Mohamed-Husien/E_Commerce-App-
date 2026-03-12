@@ -38,7 +38,9 @@ class _CartViewBodyState extends State<CartViewBody> {
             const SliverToBoxAdapter(
               child: CustomDivider(),
             ),
-            const CarItemsList(),
+            const CarItemsList(
+              cartItems: [],
+            ),
             const SliverToBoxAdapter(
               child: CustomDivider(),
             ),
