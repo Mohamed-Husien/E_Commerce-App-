@@ -7,4 +7,19 @@ class CartItemEntity {
     required this.productEntity,
     this.quantity = 0,
   });
+  num calcTotalPrice() {
+    return productEntity.price * quantity;
+  }
+
+  num calcTotalAmount() {
+    return productEntity.unitAmount * quantity;
+  }
+
+  increaseQuantity() {
+    quantity++;
+  }
+
+  decreaseQuantity() {
+    quantity--;
+  }
 }

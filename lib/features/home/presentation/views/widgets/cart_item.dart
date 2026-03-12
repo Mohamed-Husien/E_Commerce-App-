@@ -23,9 +23,9 @@ class CartItem extends StatelessWidget {
                 0xFFF3F5F7,
               ),
             ),
-            child: const CustomNetworkImage(
-                imageUrl:
-                    "https://mzbywmzboxahxuqbvsja.supabase.co/storage/v1/object/public/fruit_images/images/1000826932.jpg"),
+            child: CustomNetworkImage(
+              imageUrl: cartItemEntity.productEntity.imageURL!,
+            ),
           ),
           const SizedBox(
             width: 17,
@@ -37,8 +37,8 @@ class CartItem extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Text(
-                      "بطيخ",
+                    Text(
+                      cartItemEntity.productEntity.name,
                       style: TextStyles.bold13,
                     ),
                     const Spacer(),
@@ -51,7 +51,7 @@ class CartItem extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  "3كم",
+                  " ${cartItemEntity.calcTotalAmount()}كم",
                   textAlign: TextAlign.right,
                   style: TextStyles.regular13.copyWith(
                     color: AppColors.secondaryColor,
@@ -61,7 +61,7 @@ class CartItem extends StatelessWidget {
                   children: [
                     const CartItemActionButtons(),
                     const Spacer(),
-                    Text("60 جنية",
+                    Text("${cartItemEntity.calcTotalPrice()} جنية",
                         style: TextStyles.bold16.copyWith(
                           color: AppColors.secondaryColor,
                         ))
