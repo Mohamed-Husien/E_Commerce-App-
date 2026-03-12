@@ -1,25 +1,30 @@
-import 'package:e_commerce_app/core/cubits/proucts_cubit/products_cubit.dart';
-import 'package:e_commerce_app/core/repos/product_repo/product_repo.dart';
-import 'package:e_commerce_app/core/services/get_it_service.dart';
 import 'package:e_commerce_app/features/home/presentation/views/widgets/custom_bottom_navigation_bar.dart';
-import 'package:e_commerce_app/features/home/presentation/views/widgets/home_view.dart';
+import 'package:e_commerce_app/features/home/presentation/views/widgets/main_view_body.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MainView extends StatelessWidget {
+class MainView extends StatefulWidget {
   const MainView({super.key});
   static const String routeName = "homeView";
+
+  @override
+  State<MainView> createState() => _MainViewState();
+}
+
+class _MainViewState extends State<MainView> {
+  int currentViewIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const CustomBottomNavigationBar(),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        onItemTapped: (index) {
+          currentViewIndex = index;
+
+          setState(() {});
+        },
+      ),
       body: SafeArea(
-        child: BlocProvider(
-          create: (context) => ProductsCubit(
-            productRepo: getIt<ProductRepo>(),
-          ),
-          child: const HomeView(),
-        ),
+        child: MainViewBody(currentViewIndex: currentViewIndex),
       ),
     );
   }
