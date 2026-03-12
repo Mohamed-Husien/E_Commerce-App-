@@ -6,6 +6,10 @@ class InActiveItem extends StatelessWidget {
   final String image;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(width: 16, height: 16, child: SvgPicture.asset(image));
+    return Container(
+        color: Colors.transparent,
+        width: 16,
+        height: 20,
+        child: SvgPicture.asset(image));
   }
 }
