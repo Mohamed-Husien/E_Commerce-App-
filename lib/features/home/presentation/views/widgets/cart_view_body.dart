@@ -32,8 +32,11 @@ class _CartViewBodyState extends State<CartViewBody> {
                 child: buildAppBar(context,
                     title: "السلة", showNotification: false)),
             const SliverToBoxAdapter(child: SizedBox(height: 16)),
-            const SliverToBoxAdapter(
-              child: CartSectionHeader(),
+            SliverToBoxAdapter(
+              child: CartSectionHeader(
+                productsNumber:
+                    context.watch<CartCubit>().cartEntity.cartItems.length,
+              ),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 8)),
             SliverToBoxAdapter(
@@ -41,8 +44,8 @@ class _CartViewBodyState extends State<CartViewBody> {
                   ? const SizedBox()
                   : const CustomDivider(),
             ),
-            const CarItemsList(
-              cartItems: [],
+            CarItemsList(
+              cartItems: context.read<CartCubit>().cartEntity.cartItems,
             ),
             SliverToBoxAdapter(
               child: context.read<CartCubit>().cartEntity.cartItems.isEmpty
@@ -55,7 +58,12 @@ class _CartViewBodyState extends State<CartViewBody> {
             right: 16,
             left: 16,
             bottom: MediaQuery.sizeOf(context).height * .07,
-            child: CustomButton(onPressed: () {}, text: " الدفع بقيمة 120"))
+            child: CustomButton(
+                isDisabled:
+                    context.read<CartCubit>().cartEntity.cartItems.isEmpty,
+                onPressed: () {},
+                text:
+                    " الدفع بقيمة ${context.read<CartCubit>().cartEntity.calcTotalPrice()}"))
       ],
     );
   }

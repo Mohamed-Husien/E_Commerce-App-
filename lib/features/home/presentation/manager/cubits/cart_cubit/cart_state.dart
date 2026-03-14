@@ -1,4 +1,4 @@
-part of 'cart_cubit.dart';
+import 'package:equatable/equatable.dart';
 
 sealed class CartState extends Equatable {
   const CartState();
