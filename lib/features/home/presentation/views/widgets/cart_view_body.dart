@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/core/cubits/proucts_cubit/products_cubit.dart';
 import 'package:e_commerce_app/core/widgets/custom_app_bar.dart';
 import 'package:e_commerce_app/core/widgets/custom_button.dart';
+import 'package:e_commerce_app/features/home/presentation/manager/cubits/cart_cubit/cart_cubit.dart';
 import 'package:e_commerce_app/features/home/presentation/views/widgets/cart_item_list.dart';
 import 'package:e_commerce_app/features/home/presentation/views/widgets/cart_section_header.dart';
 import 'package:flutter/material.dart';
@@ -35,14 +36,18 @@ class _CartViewBodyState extends State<CartViewBody> {
               child: CartSectionHeader(),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 8)),
-            const SliverToBoxAdapter(
-              child: CustomDivider(),
+            SliverToBoxAdapter(
+              child: context.read<CartCubit>().cartEntity.cartItems.isEmpty
+                  ? const SizedBox()
+                  : const CustomDivider(),
             ),
             const CarItemsList(
               cartItems: [],
             ),
-            const SliverToBoxAdapter(
-              child: CustomDivider(),
+            SliverToBoxAdapter(
+              child: context.read<CartCubit>().cartEntity.cartItems.isEmpty
+                  ? const SizedBox()
+                  : const CustomDivider(),
             ),
           ],
         ),
