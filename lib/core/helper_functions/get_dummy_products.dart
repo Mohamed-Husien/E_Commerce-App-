@@ -11,8 +11,9 @@ ProductEntity getDummyProduct() {
     expirationMonths: 6,
     numberOfCalories: 100,
     unitAmount: 120,
-    reviews: [],
+    reviews: const [],
     imageURL: null,
+    code: "05dd0",
   );
 }
 

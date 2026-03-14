@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/core/entities/product_entity.dart';
+import 'package:equatable/equatable.dart';
 
-class CartItemEntity {
+class CartItemEntity extends Equatable {
   final ProductEntity productEntity;
   int quantity;
   CartItemEntity({
@@ -22,4 +23,7 @@ class CartItemEntity {
   decreaseQuantity() {
     quantity--;
   }
+
+  @override
+  List<Object?> get props => [productEntity];
 }

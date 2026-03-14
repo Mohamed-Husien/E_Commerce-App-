@@ -6,6 +6,7 @@ class ProductModel {
   final String name;
   final String productCode;
   final num price;
+  final String code;
   final String description;
   final bool isFeatured;
   String? imageURL;
@@ -30,7 +31,8 @@ class ProductModel {
       required this.unitAmount,
       required this.reviews,
       this.sellingCount = 0,
-      this.imageURL});
+      this.imageURL,
+      required this.code});
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     List<ReviewModel> reviewsList = [];
@@ -54,6 +56,7 @@ class ProductModel {
       imageURL: json["imageURL"],
       reviews: reviewsList,
       sellingCount: json['sellingCount'] ?? 0,
+      code: json['code'],
     );
   }
   ProductEntity toEntity() {
@@ -69,6 +72,7 @@ class ProductModel {
       numberOfCalories: numberOfCalories,
       unitAmount: unitAmount,
       reviews: reviews.map((review) => review.toEntity()).toList(),
+      code: code,
     );
   }
 
@@ -86,6 +90,7 @@ class ProductModel {
       "imageURL": imageURL,
       "reviews": reviews.map((review) => review.toJson()).toList(),
       "sellingCount": sellingCount,
+      "code": code
     };
   }
 }

@@ -3,8 +3,10 @@ import 'package:e_commerce_app/core/utils/app_images.dart';
 import 'package:e_commerce_app/core/utils/app_text_styles.dart';
 import 'package:e_commerce_app/core/widgets/custom_network_image.dart';
 import 'package:e_commerce_app/features/home/domain/entities/cart_item_entity.dart';
+import 'package:e_commerce_app/features/home/presentation/manager/cubits/cart_cubit/cart_cubit.dart';
 import 'package:e_commerce_app/features/home/presentation/views/widgets/cart_item_action_buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:svg_flutter/svg.dart';
 
 class CartItem extends StatelessWidget {
@@ -43,7 +45,9 @@ class CartItem extends StatelessWidget {
                     ),
                     const Spacer(),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        context.read<CartCubit>().removeProduct(cartItemEntity);
+                      },
                       child: SvgPicture.asset(
                         Assets.imagesTrash,
                       ),

@@ -10,6 +10,10 @@ class CartEntity {
     cartItems.add(cartItemEntity);
   }
 
+  void removeItem(CartItemEntity cartItemEntity) {
+    cartItems.remove(cartItemEntity);
+  }
+
   bool isExist(ProductEntity productEntity) {
     for (var cartItem in cartItems) {
       if (cartItem.productEntity == productEntity) {
@@ -34,5 +38,13 @@ class CartEntity {
       totalPrice += cartItem.calcTotalPrice();
     }
     return totalPrice;
+  }
+
+  int getTotalAmount() {
+    int totalAmount = 0;
+    for (var cartItem in cartItems) {
+      totalAmount += cartItem.quantity;
+    }
+    return totalAmount;
   }
 }

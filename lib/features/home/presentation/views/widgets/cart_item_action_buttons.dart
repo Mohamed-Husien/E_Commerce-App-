@@ -1,6 +1,8 @@
 import 'package:e_commerce_app/core/utils/app_colors.dart';
 import 'package:e_commerce_app/core/utils/app_text_styles.dart';
+import 'package:e_commerce_app/features/home/presentation/manager/cubits/cart_cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartItemActionButtons extends StatelessWidget {
   const CartItemActionButtons({
@@ -17,10 +19,10 @@ class CartItemActionButtons extends StatelessWidget {
           color: AppColors.primaryColor,
           onPressed: () {},
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
-            "3",
+            context.watch<CartCubit>().cartEntity.getTotalAmount().toString(),
             textAlign: TextAlign.center,
             style: TextStyles.bold16,
           ),
