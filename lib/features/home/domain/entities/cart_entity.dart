@@ -18,4 +18,13 @@ class CartEntity {
     }
     return false;
   }
+
+  CartItemEntity getItem(ProductEntity productEntity) {
+    for (var cartItem in cartItems) {
+      if (cartItem.productEntity == productEntity) {
+        return cartItem;
+      }
+    }
+    return CartItemEntity(productEntity: productEntity, quantity: 1);
+  }
 }
