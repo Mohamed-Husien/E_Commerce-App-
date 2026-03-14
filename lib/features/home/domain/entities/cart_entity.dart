@@ -39,12 +39,4 @@ class CartEntity {
     }
     return totalPrice;
   }
-
-  int getTotalAmount() {
-    int totalAmount = 0;
-    for (var cartItem in cartItems) {
-      totalAmount += cartItem.quantity;
-    }
-    return totalAmount;
-  }
 }

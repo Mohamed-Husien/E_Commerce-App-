@@ -1,4 +1,3 @@
-import 'package:e_commerce_app/core/cubits/proucts_cubit/products_cubit.dart';
 import 'package:e_commerce_app/core/widgets/custom_app_bar.dart';
 import 'package:e_commerce_app/core/widgets/custom_button.dart';
 import 'package:e_commerce_app/features/home/presentation/manager/cubits/cart_cubit/cart_cubit.dart';
@@ -18,7 +17,6 @@ class _CartViewBodyState extends State<CartViewBody> {
   @override
   initState() {
     super.initState();
-    context.read<ProductsCubit>().getProducts();
   }
 
   @override
