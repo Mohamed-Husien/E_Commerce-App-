@@ -37,8 +37,10 @@ class CartItemActionButtons extends StatelessWidget {
           icon: Icons.remove,
           color: const Color(0xFFF3F5F7),
           onPressed: () {
-            cartItemEntity.decreaseQuantity();
-            context.read<CartItemCubit>().updateCartItem(cartItemEntity);
+            if (cartItemEntity.quantity != 0) {
+              cartItemEntity.decreaseQuantity();
+              context.read<CartItemCubit>().updateCartItem(cartItemEntity);
+            }
           },
         )
       ],
