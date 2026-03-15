@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/features/checkout/presentation/views/widgets/shipping_section.dart';
 import 'package:flutter/material.dart';
 
 class CheckoutStepsPageView extends StatelessWidget {
@@ -22,9 +23,7 @@ class CheckoutStepsPageView extends StatelessWidget {
 
   List<Widget> getPages() {
     return [
-      const Center(
-        child: Text("الشحن"),
-      ),
+      const ShippingSection(),
       const Center(
         child: Text("العنوان"),
       ),
