@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/features/checkout/presentation/views/widgets/active_step_item.dart';
 import 'package:flutter/material.dart';
 
 class CheckoutViewBody extends StatelessWidget {
@@ -5,6 +6,6 @@ class CheckoutViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const ActiveStepItem();
   }
 }
