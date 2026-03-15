@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/features/checkout/presentation/views/widgets/address_input_section.dart';
+import 'package:e_commerce_app/features/checkout/presentation/views/widgets/payment_section.dart';
 import 'package:e_commerce_app/features/checkout/presentation/views/widgets/shipping_section.dart';
 import 'package:flutter/material.dart';
 
@@ -26,12 +27,7 @@ class CheckoutStepsPageView extends StatelessWidget {
     return [
       const ShippingSection(),
       const AddressInputSection(),
-      const Center(
-        child: Text("الدفع"),
-      ),
-      const Center(
-        child: Text("المراجعه"),
-      ),
+      const PaymentSection(),
     ];
   }
 }
