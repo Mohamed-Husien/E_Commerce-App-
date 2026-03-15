@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/features/checkout/presentation/views/widgets/active_step_item.dart';
+import 'package:e_commerce_app/features/checkout/presentation/views/widgets/step_item.dart';
 import 'package:flutter/material.dart';
 
 class CheckoutSteps extends StatelessWidget {
@@ -11,7 +11,10 @@ class CheckoutSteps extends StatelessWidget {
         getSteps().length,
         (index) {
           return Expanded(
-            child: ActiveStepItem(text: getSteps()[index]),
+            child: StepItem(
+                index: index.toString(),
+                isActive: true,
+                text: getSteps()[index]),
           );
         },
       ),

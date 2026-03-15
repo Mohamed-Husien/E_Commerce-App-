@@ -11,6 +11,9 @@ class CheckoutViewBody extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: kHorizontalPadding),
       child: Column(
         children: [
+          SizedBox(
+            height: 20,
+          ),
           CheckoutSteps(),
         ],
       ),
