@@ -4,8 +4,10 @@ import 'package:e_commerce_app/features/home/domain/entities/cart_entity.dart';
 class OrderEntity {
   final CartEntity cartEntity;
   bool? payWithCash;
-  ShippingAddressEntity? shippingAddress = ShippingAddressEntity();
+  ShippingAddressEntity shippingAddress;
 
   OrderEntity(
-      {this.payWithCash, this.shippingAddress, required this.cartEntity});
+      {this.payWithCash,
+      required this.shippingAddress,
+      required this.cartEntity});
 }
