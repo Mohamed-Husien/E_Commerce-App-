@@ -32,7 +32,7 @@ class _ShippingSectionState extends State<ShippingSection>
           isSelected: selectedIndex == 0,
           title: 'الدفع عند الاستلام',
           subTitle: 'التسليم من المكان',
-          price: (context.read<OrderEntity>().cartEntity.calcTotalPrice() + 40)
+          price: (context.read<OrderEntity>().cartEntity.calcTotalPrice() + 30)
               .toString(),
         ),
         const SizedBox(
