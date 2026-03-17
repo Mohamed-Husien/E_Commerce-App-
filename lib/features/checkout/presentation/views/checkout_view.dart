@@ -1,10 +1,12 @@
 import 'package:e_commerce_app/core/widgets/custom_app_bar.dart';
 import 'package:e_commerce_app/features/checkout/presentation/views/widgets/checkout_view_body.dart';
+import 'package:e_commerce_app/features/home/domain/entities/cart_item_entity.dart';
 import 'package:flutter/material.dart';
 
 class CheckoutView extends StatelessWidget {
-  const CheckoutView({super.key});
+  const CheckoutView({super.key, required this.cartItems});
   static const routeName = 'checkout';
+  final List<CartItemEntity> cartItems;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
