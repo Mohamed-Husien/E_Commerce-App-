@@ -36,6 +36,10 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
 
   int currentPageIndex = 0;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final ValueNotifier<AutovalidateMode> valueNotifier = ValueNotifier(
+    AutovalidateMode.disabled,
+  );
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -51,16 +55,16 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
           ),
           Expanded(
             child: CheckoutStepsPageView(
-                formKey: _formKey, pageController: _pageController),
+                valueListenable: valueNotifier,
+                formKey: _formKey,
+                pageController: _pageController),
           ),
           CustomButton(
               onPressed: () {
-                if (context.read<OrderEntity>().payWithCash != null) {
-                  _pageController.animateToPage(currentPageIndex + 1,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeIn);
-                } else {
-                  showErrorBar(context, "قم باختيار طريقة الدفع");
+                if (currentPageIndex == 0) {
+                  handleShippingSectionValidation(context);
+                } else if (currentPageIndex == 1) {
+                  handleAddressingSectionValidation(context);
                 }
               },
               text: getNextButtonText(currentPageIndex)),
@@ -70,6 +74,15 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
         ],
       ),
     );
+  }
+
+  void handleShippingSectionValidation(BuildContext context) {
+    if (context.read<OrderEntity>().payWithCash != null) {
+      _pageController.animateToPage(currentPageIndex + 1,
+          duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+    } else {
+      showErrorBar(context, "قم باختيار طريقة الدفع");
+    }
   }
 
   String getNextButtonText(int currentPageIndex) {
@@ -83,6 +96,16 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
         return 'الدفع بواسطة PayPal';
       default:
         return 'التالي';
+    }
+  }
+
+  void handleAddressingSectionValidation(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      _pageController.animateToPage(currentPageIndex + 1,
+          duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+    } else {
+      valueNotifier.value = AutovalidateMode.always;
     }
   }
 }
