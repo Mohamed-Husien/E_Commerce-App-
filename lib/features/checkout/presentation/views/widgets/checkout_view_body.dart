@@ -1,8 +1,11 @@
 import 'package:e_commerce_app/constants.dart';
+import 'package:e_commerce_app/core/helper_functions/build_error_bar.dart';
 import 'package:e_commerce_app/core/widgets/custom_button.dart';
+import 'package:e_commerce_app/features/checkout/domain/entities/order_entity.dart';
 import 'package:e_commerce_app/features/checkout/presentation/views/widgets/checkout_steps.dart';
 import 'package:e_commerce_app/features/checkout/presentation/views/widgets/checkout_steps_page_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CheckoutViewBody extends StatefulWidget {
   const CheckoutViewBody({super.key});
@@ -50,9 +53,13 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
           ),
           CustomButton(
               onPressed: () {
-                _pageController.animateToPage(currentPageIndex + 1,
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeIn);
+                if (context.read<OrderEntity>().payWithCash != null) {
+                  _pageController.animateToPage(currentPageIndex + 1,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeIn);
+                } else {
+                  showErrorBar(context, "قم باختيار طريقة الدفع");
+                }
               },
               text: getNextButtonText(currentPageIndex)),
           const SizedBox(
