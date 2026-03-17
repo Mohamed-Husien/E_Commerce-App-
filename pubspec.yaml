@@ -46,6 +46,7 @@ dependencies:
   google_sign_in: null
   intl_utils: null
   modal_progress_hud_nsn: ^0.5.1
+  provider: ^6.1.5+1
   shared_preferences: null
   skeletonizer: ^2.1.3
   svg_flutter: ^0.0.1

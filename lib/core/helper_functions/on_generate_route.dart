@@ -2,7 +2,7 @@ import 'package:e_commerce_app/features/auth/presentation/views/signin_view.dart
 import 'package:e_commerce_app/features/auth/presentation/views/sign_up_view.dart';
 import 'package:e_commerce_app/features/best_selling_fruits/presentation/views/best_selling_fruits_view.dart';
 import 'package:e_commerce_app/features/checkout/presentation/views/checkout_view.dart';
-import 'package:e_commerce_app/features/home/domain/entities/cart_item_entity.dart';
+import 'package:e_commerce_app/features/home/domain/entities/cart_entity.dart';
 import 'package:e_commerce_app/features/home/presentation/views/main_view.dart';
 import 'package:e_commerce_app/features/onBoarding/presentation/views/on_boarding_view.dart';
 import 'package:e_commerce_app/features/splash_feature/presentation/views/splash_view.dart';
@@ -37,7 +37,7 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case CheckoutView.routeName:
       return MaterialPageRoute(
         builder: (context) => CheckoutView(
-          cartItems: settings.arguments as List<CartItemEntity>,
+          cartEntity: settings.arguments as CartEntity,
         ),
       );
     default:
