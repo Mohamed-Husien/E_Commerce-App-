@@ -139,12 +139,15 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
         note: "Contact us for any questions on your order.",
         onSuccess: (Map params) async {
           Navigator.pop(context);
+          addOrderCubit.addOrder(orderEntity: orderEntity);
+
           showBar(context, 'تمت العملية بنجاح');
         },
         onError: (error) {
           Navigator.pop(context);
           log(error.toString());
           showBar(context, 'حدث خطأ في عملية الدفع');
+          addOrderCubit.addOrder(orderEntity: orderEntity);
         },
         onCancel: () {
           print('cancelled:');
