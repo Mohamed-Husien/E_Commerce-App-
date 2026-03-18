@@ -57,6 +57,24 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
             height: 20,
           ),
           CheckoutSteps(
+            onTap: (index) {
+              if (currentPageIndex == 0) {
+                _pageController.animateToPage(index,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeIn);
+              } else if (index == 1) {
+                var orderEntity = context.read<OrderInputEntity>();
+                if (orderEntity.payWithCash != null) {
+                  _pageController.animateToPage(index,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeIn);
+                } else {
+                  showBar(context, 'يرجي تحديد طريقه الدفع');
+                }
+              } else {
+                handleAddressingSectionValidation(context);
+              }
+            },
             pageController: _pageController,
             currentPageIndex: currentPageIndex,
           ),
