@@ -43,7 +43,7 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
   );
   @override
   Widget build(BuildContext context) {
-    var orderEntity = context.read<OrderEntity>();
+    var orderEntity = context.read<OrderInputEntity>();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
       child: Column(
@@ -82,7 +82,7 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
   }
 
   void handleShippingSectionValidation(BuildContext context) {
-    if (context.read<OrderEntity>().payWithCash != null) {
+    if (context.read<OrderInputEntity>().payWithCash != null) {
       _pageController.animateToPage(currentPageIndex + 1,
           duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
     } else {
@@ -91,7 +91,7 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
   }
 
   String getNextButtonText(int currentPageIndex,
-      {required OrderEntity orderEntity}) {
+      {required OrderInputEntity orderEntity}) {
     switch (currentPageIndex) {
       case 0:
         return 'التالي';

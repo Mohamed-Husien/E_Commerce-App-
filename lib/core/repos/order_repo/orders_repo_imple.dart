@@ -12,7 +12,7 @@ class OrdersRepoImple implements OrdersRepo {
   OrdersRepoImple({required this.firestoreService});
   @override
   Future<Either<Failure, void>> addOrder(
-      {required OrderEntity orderEntity}) async {
+      {required OrderInputEntity orderEntity}) async {
     try {
       await firestoreService.addData(
           path: BackendEndpoint.orders,

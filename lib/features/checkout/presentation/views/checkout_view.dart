@@ -24,7 +24,7 @@ class CheckoutView extends StatelessWidget {
         appBar: buildAppBar(context,
             title: "الشحن", showBackButton: true, showNotification: false),
         body: Provider.value(
-          value: OrderEntity(
+          value: OrderInputEntity(
               uID: getUser().uId,
               cartEntity: cartEntity,
               shippingAddressEntity: ShippingAddressEntity()),
