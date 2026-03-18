@@ -1,10 +1,14 @@
 import 'package:e_commerce_app/core/helper_functions/get_user.dart';
+import 'package:e_commerce_app/core/repos/order_repo/orders_repo.dart';
+import 'package:e_commerce_app/core/services/get_it_service.dart';
 import 'package:e_commerce_app/core/widgets/custom_app_bar.dart';
 import 'package:e_commerce_app/features/checkout/domain/entities/order_entity.dart';
 import 'package:e_commerce_app/features/checkout/domain/entities/shipping_address_entity.dart';
+import 'package:e_commerce_app/features/checkout/presentation/manger/cubits/add_order/add_order_cubit.dart';
 import 'package:e_commerce_app/features/checkout/presentation/views/widgets/checkout_view_body.dart';
 import 'package:e_commerce_app/features/home/domain/entities/cart_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 class CheckoutView extends StatelessWidget {
@@ -13,15 +17,18 @@ class CheckoutView extends StatelessWidget {
   final CartEntity cartEntity;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: buildAppBar(context,
-          title: "الشحن", showBackButton: true, showNotification: false),
-      body: Provider.value(
-        value: OrderEntity(
-            uID: getUser().uId,
-            cartEntity: cartEntity,
-            shippingAddressEntity: ShippingAddressEntity()),
-        child: const CheckoutViewBody(),
+    return BlocProvider(
+      create: (context) => AddOrderCubit(ordersRepo: getIt.get<OrdersRepo>()),
+      child: Scaffold(
+        appBar: buildAppBar(context,
+            title: "الشحن", showBackButton: true, showNotification: false),
+        body: Provider.value(
+          value: OrderEntity(
+              uID: getUser().uId,
+              cartEntity: cartEntity,
+              shippingAddressEntity: ShippingAddressEntity()),
+          child: const CheckoutViewBody(),
+        ),
       ),
     );
   }
