@@ -20,7 +20,7 @@ class CheckoutView extends StatelessWidget {
         value: OrderEntity(
             uID: getUser().uId,
             cartEntity: cartEntity,
-            shippingAddress: ShippingAddressEntity()),
+            shippingAddressEntity: ShippingAddressEntity()),
         child: const CheckoutViewBody(),
       ),
     );
