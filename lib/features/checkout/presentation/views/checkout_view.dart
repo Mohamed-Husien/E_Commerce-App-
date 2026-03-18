@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/core/helper_functions/get_user.dart';
 import 'package:e_commerce_app/core/widgets/custom_app_bar.dart';
 import 'package:e_commerce_app/features/checkout/domain/entities/order_entity.dart';
 import 'package:e_commerce_app/features/checkout/domain/entities/shipping_address_entity.dart';
@@ -17,7 +18,9 @@ class CheckoutView extends StatelessWidget {
           title: "الشحن", showBackButton: true, showNotification: false),
       body: Provider.value(
         value: OrderEntity(
-            cartEntity: cartEntity, shippingAddress: ShippingAddressEntity()),
+            uID: getUser().uId,
+            cartEntity: cartEntity,
+            shippingAddress: ShippingAddressEntity()),
         child: const CheckoutViewBody(),
       ),
     );
