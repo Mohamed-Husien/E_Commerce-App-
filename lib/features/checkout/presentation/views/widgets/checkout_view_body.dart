@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:e_commerce_app/constants.dart';
 import 'package:e_commerce_app/core/helper_functions/build_error_bar.dart';
 import 'package:e_commerce_app/core/utils/app_keys.dart';
 import 'package:e_commerce_app/core/widgets/custom_button.dart';
 import 'package:e_commerce_app/features/checkout/domain/entities/order_entity.dart';
 import 'package:e_commerce_app/features/checkout/domain/entities/paypal_payment_entity/paypal_payment_entity.dart';
+import 'package:e_commerce_app/features/checkout/presentation/manger/cubits/add_order/add_order_cubit.dart';
 import 'package:e_commerce_app/features/checkout/presentation/views/widgets/checkout_steps.dart';
 import 'package:e_commerce_app/features/checkout/presentation/views/widgets/checkout_steps_page_view.dart';
 import 'package:flutter/material.dart';
@@ -123,6 +126,8 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
     var orderEntity = context.read<OrderInputEntity>();
     PaypalPaymentEntity paypalPaymentEntity =
         PaypalPaymentEntity.fromEntity(orderEntity);
+    var addOrderCubit = context.read<AddOrderCubit>();
+
     Navigator.of(context).push(MaterialPageRoute(
       builder: (BuildContext context) => PaypalCheckoutView(
         sandboxMode: true,
@@ -133,11 +138,13 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
         ],
         note: "Contact us for any questions on your order.",
         onSuccess: (Map params) async {
-          print("onSuccess: $params");
+          Navigator.pop(context);
+          showBar(context, 'تمت العملية بنجاح');
         },
         onError: (error) {
-          print("onError: $error");
           Navigator.pop(context);
+          log(error.toString());
+          showBar(context, 'حدث خطأ في عملية الدفع');
         },
         onCancel: () {
           print('cancelled:');
