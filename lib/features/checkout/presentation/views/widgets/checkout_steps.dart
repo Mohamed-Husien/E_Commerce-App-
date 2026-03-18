@@ -25,7 +25,7 @@ class CheckoutSteps extends StatelessWidget {
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeIn);
                 } else {
-                  showErrorBar(context, "قم باختيار طريقة الدفع");
+                  showBar(context, "قم باختيار طريقة الدفع");
                 }
               },
               child: StepItem(

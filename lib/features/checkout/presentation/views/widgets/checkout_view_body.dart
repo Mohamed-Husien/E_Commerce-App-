@@ -2,6 +2,7 @@ import 'package:e_commerce_app/constants.dart';
 import 'package:e_commerce_app/core/helper_functions/build_error_bar.dart';
 import 'package:e_commerce_app/core/widgets/custom_button.dart';
 import 'package:e_commerce_app/features/checkout/domain/entities/order_entity.dart';
+import 'package:e_commerce_app/features/checkout/presentation/manger/cubits/add_order/add_order_cubit.dart';
 import 'package:e_commerce_app/features/checkout/presentation/views/widgets/checkout_steps.dart';
 import 'package:e_commerce_app/features/checkout/presentation/views/widgets/checkout_steps_page_view.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,7 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
   );
   @override
   Widget build(BuildContext context) {
+    var orderEntity = context.read<OrderEntity>();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
       child: Column(
@@ -65,9 +67,14 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
                   handleShippingSectionValidation(context);
                 } else if (currentPageIndex == 1) {
                   handleAddressingSectionValidation(context);
+                } else {
+                  context
+                      .read<AddOrderCubit>()
+                      .addOrder(orderEntity: orderEntity);
                 }
               },
-              text: getNextButtonText(currentPageIndex)),
+              text: getNextButtonText(currentPageIndex,
+                  orderEntity: orderEntity)),
           const SizedBox(
             height: 24,
           ),
@@ -81,11 +88,12 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
       _pageController.animateToPage(currentPageIndex + 1,
           duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
     } else {
-      showErrorBar(context, "قم باختيار طريقة الدفع");
+      showBar(context, "قم باختيار طريقة الدفع");
     }
   }
 
-  String getNextButtonText(int currentPageIndex) {
+  String getNextButtonText(int currentPageIndex,
+      {required OrderEntity orderEntity}) {
     switch (currentPageIndex) {
       case 0:
         return 'التالي';
@@ -93,7 +101,9 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
         return 'التالي';
 
       case 2:
-        return 'الدفع بواسطة PayPal';
+        return orderEntity.payWithCash!
+            ? 'تأكيد والدفع كاش'
+            : 'الدفع بواسطة PayPal';
       default:
         return 'التالي';
     }

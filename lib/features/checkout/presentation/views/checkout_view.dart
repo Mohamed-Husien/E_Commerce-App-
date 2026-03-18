@@ -5,6 +5,7 @@ import 'package:e_commerce_app/core/widgets/custom_app_bar.dart';
 import 'package:e_commerce_app/features/checkout/domain/entities/order_entity.dart';
 import 'package:e_commerce_app/features/checkout/domain/entities/shipping_address_entity.dart';
 import 'package:e_commerce_app/features/checkout/presentation/manger/cubits/add_order/add_order_cubit.dart';
+import 'package:e_commerce_app/features/checkout/presentation/views/widgets/add_order_cubit_bloc_builder.dart';
 import 'package:e_commerce_app/features/checkout/presentation/views/widgets/checkout_view_body.dart';
 import 'package:e_commerce_app/features/home/domain/entities/cart_entity.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class CheckoutView extends StatelessWidget {
               uID: getUser().uId,
               cartEntity: cartEntity,
               shippingAddressEntity: ShippingAddressEntity()),
-          child: const CheckoutViewBody(),
+          child: const AddOrderCubitBlocBuilder(child: CheckoutViewBody()),
         ),
       ),
     );
