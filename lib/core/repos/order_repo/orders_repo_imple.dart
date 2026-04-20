@@ -14,9 +14,11 @@ class OrdersRepoImple implements OrdersRepo {
   Future<Either<Failure, void>> addOrder(
       {required OrderInputEntity orderEntity}) async {
     try {
+      var orderModel = OrderModel.fromEntity(orderEntity);
       await firestoreService.addData(
           path: BackendEndpoint.orders,
-          data: OrderModel.fromEntity(orderEntity).toJson());
+          documentId: orderModel.orderId,
+          data: orderModel.toJson());
       return const Right(null);
     } catch (e) {
       return Left(ServerFailure(e.toString()));
